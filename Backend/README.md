@@ -174,3 +174,85 @@ Authorization: Bearer JWT_TOKEN_STRING
   "message": "Please authenticate"
 }
 ```
+
+# Captain API Documentation
+
+## Register Captain
+Register a new captain with vehicle details.
+
+**Endpoint:** `POST /captain/register`
+
+### Request Body
+```json
+{
+  "fullName": {
+    "firstName": "string",    // minimum 3 characters
+    "lastName": "string"      // minimum 3 characters
+  },
+  "email": "string",          // valid email format
+  "password": "string",       // minimum 6 characters
+  "vehicle": {
+    "color": "string",        // minimum 3 characters
+    "plate": "string",        // minimum 3 characters
+    "capacity": "number",     // minimum 1
+    "vehicleType": "string"   // "car", "bike", or "auto"
+  }
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 201 Created
+```json
+{
+  "token": "JWT_TOKEN_STRING",
+  "captain": {
+    "fullName": {
+      "firstName": "string",
+      "lastName": "string"
+    },
+    "email": "string",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "capacity": "number",
+      "vehicleType": "string"
+    },
+    "Status": "inactive",
+    "_id": "string"
+  }
+}
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    }
+  ]
+}
+```
+
+**Code:** 400 Bad Request
+```json
+{
+  "message": "Captain Already Exists"
+}
+```
+
+### Validation Rules
+- Email must be valid format
+- First Name must be at least 3 characters
+- Password must be at least 6 characters
+- Vehicle color must be at least 3 characters
+- Vehicle plate must be at least 3 characters
+- Vehicle capacity must be at least 1
+- Vehicle type must be one of: car, bike, auto
+- All fields are required
