@@ -42,7 +42,6 @@ module.exports.registerCaptain =async (req,res,next)=>{
 
 
 module.exports.loginCaptain = async(req,res,next)=>{
-    console.log('BODY:', req.body);
     const errors=validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()})
