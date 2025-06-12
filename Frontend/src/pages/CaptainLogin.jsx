@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import icon from '../assets/icon.png'
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { CaptainDataContext } from '../context/captainContext'
@@ -15,6 +16,10 @@ const CaptainLogin =  () => {
 
     const submitHandler= async (e)=>{
         e.preventDefault()
+         if (password.length < 6) {
+        alert('Password must be at least 6 characters long')
+        return
+    }
         const captainData = {
                 email,
                 password
@@ -38,7 +43,7 @@ const CaptainLogin =  () => {
         <div>
             <img 
             className='w-30 px-5 mt-0' 
-            src="https://images.seeklogo.com/logo-png/33/1/uber-logo-png_seeklogo-338872.png"  />
+            src={icon}  />
             <form onSubmit={(e)=>{
                 submitHandler(e)}}
             className='px-5'>

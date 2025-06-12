@@ -1,8 +1,12 @@
 import React from 'react'
+import icon from '../assets/icon.png'
 
 const CaptainHome = () => {
   return (
-    <div>CaptainHome</div>
+    <div>
+        <img src={icon} alt="" />
+        CaptainHome
+        </div>
   )
 }
 

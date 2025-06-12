@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import icon from '../assets/icon.png'
 import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {userDataContext} from '../context/userContext'
@@ -14,6 +15,11 @@ const UserLogin = () => {
 
     const submitHandler= async (e)=>{
         e.preventDefault()
+         if (password.length < 6) {
+        alert('Password must be at least 6 characters long')
+        return
+    }
+    
         const userData = {
         email,
         password
@@ -35,7 +41,7 @@ const UserLogin = () => {
         <div>
             <img 
             className='w-30 px-5 mt-0' 
-            src="https://images.seeklogo.com/logo-png/33/1/uber-logo-png_seeklogo-338872.png"  />
+            src={icon}  />
             <form onSubmit={(e)=>{
                 submitHandler(e)}}
             className='px-5'>

@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import icon from '../assets/icon.png'
 import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {userDataContext} from '../context/userContext'
 
 
 const UserSignup = () => {
+    const navigate=useNavigate()
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
-    const [userData, setUserData] = useState({});
-
+    
+    
     const {user, setUser}=React.useContext(userDataContext)
-    const navigate = useNavigate()
+    
     
 
     const submitHandler= async (e)=>{
@@ -46,7 +48,7 @@ const UserSignup = () => {
         <div>
             <img 
             className='w-30 px-5 mt-0' 
-            src="https://images.seeklogo.com/logo-png/33/1/uber-logo-png_seeklogo-338872.png"  />
+            src={icon} />
             <form onSubmit={(e)=>{
                 submitHandler(e)}}
             className='px-5'>
