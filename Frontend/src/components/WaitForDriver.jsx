@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react'
 
 const WaitForDriver = ({ selectedVehicle = "UberGo", setWaitForDriverPanel, setDriverFoundPanel }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setWaitForDriverPanel(false)
-      setDriverFoundPanel(true)
-    }, Math.random() * 5000 + 5000) // Random time between 5-10 seconds
-    return () => clearTimeout(timer)
-  }, [])
+  
 
   const vehicleImages = {
     UberGo: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_538,w_956/v1688398971/assets/29/fbb8b0-75b1-4e2a-8533-3a364e7042fa/original/UberSelect-White.png",

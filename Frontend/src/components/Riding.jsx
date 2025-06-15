@@ -1,6 +1,7 @@
 import React from 'react'
 import map from '../assets/map.png'
 import icon from '../assets/icon.png'
+import { Link } from 'react-router-dom'
 
 const Riding = ({ selectedVehicle }) => {
   const vehicleImages = {
@@ -16,7 +17,13 @@ const Riding = ({ selectedVehicle }) => {
   }
 
   return (
+    
     <div className="h-screen relative">
+        <div>
+            <Link to={'/home'} className='absolute h-11 w-11 top-3 right-4 m-3 bg-[#ededed] rounded-full'>
+                <svg className='h-8 w-8 mt-1.5 ml-1.5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path></svg>
+            </Link>
+        </div>
       <img className='w-30 left-5 mt-0 absolute' src={icon} />
       <img className='w-screen h-[570px]' src={map} alt="" />
       

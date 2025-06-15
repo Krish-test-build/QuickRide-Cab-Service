@@ -21,7 +21,8 @@ module.exports.authUser=async (req,res,next)=>{
         const user =await userModel.findById(decoded.id)
 
         req.user=user
-
+        req.userId=user._id
+    
         return next()
 
     }catch(err){
