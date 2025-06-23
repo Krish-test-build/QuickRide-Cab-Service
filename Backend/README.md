@@ -385,3 +385,275 @@ Authorization: Bearer JWT_TOKEN_STRING
   "message": "Please authenticate"
 }
 ```
+
+# Ride API Documentation
+
+## Create Ride
+Create a new ride.
+
+**Endpoint:** `POST /rides/create`
+
+### Request Body
+```json
+{
+  "pickup": "string",       // minimum 3 characters
+  "destination": "string",  // minimum 3 characters
+  "vehicleType": "string"   // "auto", "bike", or "car"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 201 Created
+```json
+{
+  "user": "string",
+  "pickup": "string",
+  "destination": "string",
+  "otp": "string",
+  "fare": "number",
+  "_id": "string"
+}
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid pickup Location",
+      "param": "pickup",
+      "location": "body"
+    }
+  ]
+}
+```
+
+**Code:** 500 Internal Server Error
+```json
+{
+  "message": "Error message"
+}
+```
+
+### Validation Rules
+- Pickup must be a string with at least 3 characters
+- Destination must be a string with at least 3 characters
+- Vehicle type must be one of: "auto", "bike", "car"
+- All fields are required
+
+## Get Fare
+Calculate fare for a ride.
+
+**Endpoint:** `GET /rides/get-fare`
+
+### Query Parameters
+```
+pickup: string (minimum 3 characters)
+destination: string (minimum 3 characters)
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "auto": "number",
+  "bike": "number",
+  "car": "number"
+}
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid pickup Location",
+      "param": "pickup",
+      "location": "query"
+    }
+  ]
+}
+```
+
+**Code:** 500 Internal Server Error
+```json
+{
+  "message": "Error message"
+}
+```
+
+### Validation Rules
+- Pickup must be a string with at least 3 characters
+- Destination must be a string with at least 3 characters
+- Both fields are required
+
+# Map API Documentation
+
+## Get Location Coordinates
+Get latitude and longitude for a given address.
+
+**Endpoint:** `GET /maps/get-location`
+
+### Query Parameters
+```
+address: string (minimum 3 characters)
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "lat": "string",
+  "lon": "string"
+}
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid value",
+      "param": "address",
+      "location": "query"
+    }
+  ]
+}
+```
+
+**Code:** 404 Not Found
+```json
+{
+  "message": "Coordinates Not Found"
+}
+```
+
+### Validation Rules
+- Address must be a string with at least 3 characters
+- Address is required
+
+## Get Distance and Time
+Calculate distance and time between two locations.
+
+**Endpoint:** `GET /maps/get-distance-time`
+
+### Query Parameters
+```
+origin: string (minimum 3 characters)
+destination: string (minimum 3 characters)
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "distance": "string (e.g., '10.5 Km')",
+  "duration": "string (e.g., '15.5 Minutes')"
+}
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid value",
+      "param": "origin",
+      "location": "query"
+    }
+  ]
+}
+```
+
+**Code:** 404 Not Found
+```json
+{
+  "message": "Route Not Found Between the 2 Areas"
+}
+```
+
+### Validation Rules
+- Origin must be a string with at least 3 characters
+- Destination must be a string with at least 3 characters
+- Both fields are required
+
+## Get AutoComplete Suggestions
+Get location suggestions based on input.
+
+**Endpoint:** `GET /maps/get-suggestions`
+
+### Query Parameters
+```
+input: string (minimum 3 characters)
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+[
+  {
+    "display_name": "string",
+    "lat": "string",
+    "lon": "string"
+  }
+]
+```
+
+#### Error Responses
+
+**Code:** 400 Bad Request
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid value",
+      "param": "input",
+      "location": "query"
+    }
+  ]
+}
+```
+
+**Code:** 404 Not Found
+```json
+{
+  "message": "No suggestions found for the given input"
+}
+```
+
+### Validation Rules
+- Input must be a string with at least 3 characters
+- Input is required
+
+# Root Endpoint
+
+## Welcome Message
+Get a welcome message from the server.
+
+**Endpoint:** `GET /`
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```
+hello Worlds
+```

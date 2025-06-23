@@ -47,7 +47,7 @@ const UserSignup = () => {
     <div className='h-screen flex flex-col justify-between pb-12' >
         <div>
             <img 
-            className='w-30 px-5 mt-0' 
+            className='w-35 px-5 my-3' 
             src={icon} />
             <form onSubmit={(e)=>{
                 submitHandler(e)}}

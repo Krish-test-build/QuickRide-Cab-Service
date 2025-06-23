@@ -15,22 +15,24 @@ const userSchema =new mongoose.Schema({
             minlength:[3,'First Name must be atleast 3 characters long'],
         }
     },
+    socketID:{
+            type:String,
+            default:null,
+        },
         email:{
             type:String,
             required:true,
             unique:true,
             trim:true,
             lowercase:true
-        },
+        },  
         password:{
             type:String,
             required:true,
             select:false
 
         },
-        socketID:{
-            type:String
-        },
+        
     
 
 })

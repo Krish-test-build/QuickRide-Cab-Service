@@ -1,6 +1,18 @@
 import React from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+
 
 const RidePopup = (props) => {
+  const RideHandler = () => {
+    if (props.myVehicle === 'car') {
+      return('QuickGo')
+    }else if (props.myVehicle === 'bike') {
+      return('Bike')
+    } else if (props.myVehicle === 'auto') {
+      return('Auto')
+    }
+  }
   return (
     <div>
         <div className="flex flex-col p-4">
@@ -23,19 +35,19 @@ const RidePopup = (props) => {
             <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364ZM12 13C13.1046 13 14 12.1046 14 11C14 9.89543 13.1046 9 12 9C10.8954 9 10 9.89543 10 11C10 12.1046 10.8954 13 12 13Z"></path>
             </svg>
-            <span className="text-lg font-medium">Selected Location</span>
+            <span className="text-lg font-medium">Selected Pickup Location</span>
           </div>
-          <p className="text-gray-600">Lorem ipsum dolor sit amet, elit. Hic, necessitatibus?</p>
+          <p className="text-gray-600">{props.ride?.pickup}</p>
         </div>
 
         <div className="bg-[#f9f9f9] rounded-xl p-4">
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-xl font-semibold">UberGo</h3>
+              <h3 className="text-xl font-semibold">{RideHandler()}</h3>
               <p className="text-gray-600">2 mins away</p>
             </div>
             
-            <span className="text-xl font-bold inline-flex "> <svg className=' w-7 h-6 ml-3 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path></svg>₹193.20</span>
+            <span className="text-xl font-bold inline-flex "> <svg className=' w-7 h-6 ml-3 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path></svg>₹{props.ride?.fare}</span>
           </div>
         </div>
 
@@ -44,6 +56,8 @@ const RidePopup = (props) => {
             onClick={()=>{
                 props.setConfirmRidePopupPanel(true)
                 props.setRidePopupPanel(false)
+                props.confirmRide()
+
             }}
           className="w-1/2 border-3 border-black text-black py-3 rounded-lg mt-4 font-semibold text-lg"
         >

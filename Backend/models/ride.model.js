@@ -6,11 +6,11 @@ const rideSchema=new mongoose.Schema({
     user: { 
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 
-        ref: 'User' 
+        ref: 'user' 
     },
     captain: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' 
+        ref: 'captain', 
         },
     pickup: {
         type: String,
@@ -40,6 +40,11 @@ const rideSchema=new mongoose.Schema({
         select: false,
          
     },
+    socketID: 
+    { type: String, 
+        default: null
+    }
+
 
 })
 

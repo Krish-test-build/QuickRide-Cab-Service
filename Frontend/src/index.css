@@ -2,3 +2,12 @@
 *{
     box-sizing: border-box;
 }
+
+.leaflet-control-zoom {
+  top: auto !important;
+  bottom: 60px !important;
+  right: 0px !important;
+  left: auto !important;
+  z-index: 9999 !important;
+}   
+
