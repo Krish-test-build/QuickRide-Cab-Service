@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CaptainDetails = () => {
+const CaptainDetails = (props) => {
   return (
     <div className='bg-white p-2 rounded-t-xl pt-4'>
           <div className="w-full max-w-md">

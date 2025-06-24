@@ -1,26 +1,24 @@
-# User API Documentation
+## User API Documentation
 
-## Register User
-Register a new user in the system.
+### Register User
 
-**Endpoint:** `POST /user/register`
+**Endpoint:** `POST /users/register`
 
-### Request Body
+**Request Body:**
+
 ```json
 {
   "fullName": {
-    "firstName": "string", // minimum 3 characters
-    "lastName": "string"   // minimum 3 characters
+    "firstName": "string",
+    "lastName": "string"
   },
-  "email": "string",      // valid email format
-  "password": "string"    // minimum 6 characters
+  "email": "string",
+  "password": "string"
 }
 ```
 
-### Response
+**Success Response:** `201 Created`
 
-#### Success Response
-**Code:** 201 Created
 ```json
 {
   "token": "JWT_TOKEN_STRING",
@@ -35,9 +33,8 @@ Register a new user in the system.
 }
 ```
 
-#### Error Responses
+**Error Response:** `400 Bad Request`
 
-**Code:** 400 Bad Request
 ```json
 {
   "errors": [
@@ -50,29 +47,30 @@ Register a new user in the system.
 }
 ```
 
-### Validation Rules
-- Email must be valid format
-- First Name must be at least 3 characters long
-- Password must be at least 6 characters long
-- All fields (firstName, lastName, email, password) are required
+**Validation Rules:**
 
-## Login User
-Login with existing user credentials.
+* Email must be valid format
+* First Name must be at least 3 characters
+* Password must be at least 6 characters
+* All fields are required
 
-**Endpoint:** `POST /user/login`
+---
 
-### Request Body
+### Login User
+
+**Endpoint:** `POST /users/login`
+
+**Request Body:**
+
 ```json
 {
-  "email": "string",      // valid email format
-  "password": "string"    // minimum 6 characters
+  "email": "string",
+  "password": "string"
 }
 ```
 
-### Response
+**Success Response:** `200 OK`
 
-#### Success Response
-**Code:** 200 OK
 ```json
 {
   "token": "JWT_TOKEN_STRING",
@@ -87,9 +85,10 @@ Login with existing user credentials.
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+
 ```json
 {
   "errors": [
@@ -102,32 +101,30 @@ Login with existing user credentials.
 }
 ```
 
-**Code:** 401 Unauthorized
+* `401 Unauthorized`
+
 ```json
 {
   "message": "Invalid Email or Password"
 }
 ```
 
-### Validation Rules
-- Email must be valid format
-- Password must be at least 6 characters long
-- Both email and password are required
+**Validation Rules:**
 
-## Get User Profile
-Get the profile of the currently authenticated user.
+* Email must be valid format
+* Password must be at least 6 characters
+* All fields are required
 
-**Endpoint:** `GET /user/profile`
+---
 
-### Headers
-```
-Authorization: Bearer JWT_TOKEN_STRING
-```
+### Get User Profile
 
-### Response
+**Endpoint:** `GET /users/profile`
 
-#### Success Response
-**Code:** 200 OK
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
+
+**Success Response:** `200 OK`
+
 ```json
 {
   "fullName": {
@@ -139,71 +136,67 @@ Authorization: Bearer JWT_TOKEN_STRING
 }
 ```
 
-#### Error Response
-**Code:** 401 Unauthorized
+**Error Response:** `401 Unauthorized`
+
 ```json
 {
   "message": "Please authenticate"
 }
 ```
 
-## Logout User
-Logout the currently authenticated user and invalidate the token.
+---
 
-**Endpoint:** `GET /user/logout`
+### Logout User
 
-### Headers
-```
-Authorization: Bearer JWT_TOKEN_STRING
-```
+**Endpoint:** `GET /users/logout`
 
-### Response
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
   "message": "Logged out"
 }
 ```
 
-#### Error Response
-**Code:** 401 Unauthorized
+**Error Response:** `401 Unauthorized`
+
 ```json
 {
   "message": "Please authenticate"
 }
 ```
 
-# Captain API Documentation
+---
 
-## Register Captain
-Register a new captain with vehicle details.
+## Captain API Documentation
 
-**Endpoint:** `POST /captain/register`
+### Register Captain
 
-### Request Body
+**Endpoint:** `POST /captains/register`
+
+**Request Body:**
+
 ```json
 {
   "fullName": {
-    "firstName": "string",    // minimum 3 characters
-    "lastName": "string"      // minimum 3 characters
+    "firstName": "string",
+    "lastName": "string"
   },
-  "email": "string",          // valid email format
-  "password": "string",       // minimum 6 characters
+  "email": "string",
+  "password": "string",
   "vehicle": {
-    "color": "string",        // minimum 3 characters
-    "plate": "string",        // minimum 3 characters
-    "capacity": "number",     // minimum 1
-    "vehicleType": "string"   // "car", "bike", or "auto"
+    "color": "string",
+    "plate": "string",
+    "capacity": "number",
+    "vehicleType": "string"
   }
 }
 ```
 
-### Response
+**Success Response:** `201 Created`
 
-#### Success Response
-**Code:** 201 Created
 ```json
 {
   "token": "JWT_TOKEN_STRING",
@@ -225,9 +218,10 @@ Register a new captain with vehicle details.
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+
 ```json
 {
   "errors": [
@@ -240,41 +234,42 @@ Register a new captain with vehicle details.
 }
 ```
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+
 ```json
 {
   "message": "Captain Already Exists"
 }
 ```
 
-### Validation Rules
-- Email must be valid format
-- First Name must be at least 3 characters
-- Last Name is required
-- Password must be at least 6 characters
-- Vehicle color must be at least 3 characters
-- Vehicle plate must be at least 3 characters
-- Vehicle capacity must be at least 1
-- Vehicle type must be one of: "car", "bike", "auto"
-- All fields are required
+**Validation Rules:**
 
-## Login Captain
-Login with existing captain credentials.
+* Email must be valid format
+* First Name must be at least 3 characters
+* Last Name is required
+* Password must be at least 6 characters
+* Vehicle color & plate must be at least 3 characters
+* Vehicle capacity must be at least 1
+* Vehicle type must be one of: "car", "bike", "auto"
+* All fields are required
 
-**Endpoint:** `POST /captain/login`
+---
 
-### Request Body
+### Login Captain
+
+**Endpoint:** `POST /captains/login`
+
+**Request Body:**
+
 ```json
 {
-  "email": "string",    // valid email format
-  "password": "string"  // minimum 6 characters
+  "email": "string",
+  "password": "string"
 }
 ```
 
-### Response
+**Success Response:** `200 OK`
 
-#### Success Response
-**Code:** 200 OK
 ```json
 {
   "token": "JWT_TOKEN_STRING",
@@ -296,9 +291,10 @@ Login with existing captain credentials.
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+
 ```json
 {
   "errors": [
@@ -311,27 +307,24 @@ Login with existing captain credentials.
 }
 ```
 
-**Code:** 401 Unauthorized
+* `401 Unauthorized`
+
 ```json
 {
   "message": "Invalid Email or Password"
 }
 ```
 
-## Get Captain Profile
-Get the profile of the currently authenticated captain.
+---
 
-**Endpoint:** `GET /captain/profile`
+### Get Captain Profile
 
-### Headers
-```
-Authorization: Bearer JWT_TOKEN_STRING
-```
+**Endpoint:** `GET /captains/profile`
 
-### Response
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
   "fullName": {
@@ -350,62 +343,57 @@ Authorization: Bearer JWT_TOKEN_STRING
 }
 ```
 
-#### Error Response
-**Code:** 401 Unauthorized
+**Error Response:** `401 Unauthorized`
+
 ```json
 {
   "message": "Please authenticate"
 }
 ```
 
-## Logout Captain
-Logout the currently authenticated captain and invalidate the token.
+---
 
-**Endpoint:** `GET /captain/logout`
+### Logout Captain
 
-### Headers
-```
-Authorization: Bearer JWT_TOKEN_STRING
-```
+**Endpoint:** `GET /captains/logout`
 
-### Response
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
   "message": "Logged out"
 }
 ```
 
-#### Error Response
-**Code:** 401 Unauthorized
+**Error Response:** `401 Unauthorized`
+
 ```json
 {
   "message": "Please authenticate"
 }
 ```
+## Ride API Documentation
 
-# Ride API Documentation
-
-## Create Ride
-Create a new ride.
+### Create Ride
 
 **Endpoint:** `POST /rides/create`
 
-### Request Body
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
+
+**Request Body:**
+
 ```json
 {
-  "pickup": "string",       // minimum 3 characters
-  "destination": "string",  // minimum 3 characters
-  "vehicleType": "string"   // "auto", "bike", or "car"
+  "pickup": "string",
+  "destination": "string",
+  "vehicleType": "string"
 }
 ```
 
-### Response
+**Success Response:** `201 Created`
 
-#### Success Response
-**Code:** 201 Created
 ```json
 {
   "user": "string",
@@ -417,49 +405,28 @@ Create a new ride.
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
-```json
-{
-  "errors": [
-    {
-      "msg": "Invalid pickup Location",
-      "param": "pickup",
-      "location": "body"
-    }
-  ]
-}
-```
+* `400 Bad Request`
+* `500 Internal Server Error`
 
-**Code:** 500 Internal Server Error
-```json
-{
-  "message": "Error message"
-}
-```
+**Validation Rules:**
 
-### Validation Rules
-- Pickup must be a string with at least 3 characters
-- Destination must be a string with at least 3 characters
-- Vehicle type must be one of: "auto", "bike", "car"
-- All fields are required
+* All fields are required and must be valid strings
+* Vehicle type must be one of: "auto", "bike", "car"
 
-## Get Fare
-Calculate fare for a ride.
+---
+
+### Get Fare
 
 **Endpoint:** `GET /rides/get-fare`
 
-### Query Parameters
-```
-pickup: string (minimum 3 characters)
-destination: string (minimum 3 characters)
-```
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-### Response
+**Query Parameters:** `pickup`, `destination`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
   "auto": "number",
@@ -468,49 +435,121 @@ destination: string (minimum 3 characters)
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+* `500 Internal Server Error`
+
+---
+
+### Confirm Ride
+
+**Endpoint:** `POST /rides/confirm`
+
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
+
+**Request Body:**
+
 ```json
 {
-  "errors": [
-    {
-      "msg": "Invalid pickup Location",
-      "param": "pickup",
-      "location": "query"
-    }
-  ]
+  "rideId": "string"
 }
 ```
 
-**Code:** 500 Internal Server Error
+**Success Response:** `200 OK`
+
 ```json
 {
-  "message": "Error message"
+  "user": { ... },
+  "pickup": "string",
+  "destination": "string",
+  "fare": "number",
+  "status": "accepted",
+  "captain": { ... }
 }
 ```
 
-### Validation Rules
-- Pickup must be a string with at least 3 characters
-- Destination must be a string with at least 3 characters
-- Both fields are required
+**Error Responses:**
 
-# Map API Documentation
+* `400 Bad Request`
+* `404 Not Found`
+* `401 Unauthorized`
 
-## Get Location Coordinates
-Get latitude and longitude for a given address.
+---
+
+### Start Ride
+
+**Endpoint:** `GET /rides/start-ride`
+
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
+
+**Query Parameters:** `rideId`, `otp`
+
+**Success Response:** `200 OK`
+
+```json
+{
+  "user": { ... },
+  "pickup": "string",
+  "destination": "string",
+  "fare": "number",
+  "status": "ongoing",
+  "captain": { ... },
+  "otp": "string"
+}
+```
+
+**Error Responses:** `400`, `500`, `401`
+
+---
+
+### End Ride
+
+**Endpoint:** `POST /rides/end-ride`
+
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
+
+**Request Body:**
+
+```json
+{
+  "rideId": "string"
+}
+```
+
+**Success Response:** `200 OK`
+
+```json
+{
+  "user": { ... },
+  "pickup": "string",
+  "destination": "string",
+  "fare": "number",
+  "status": "completed",
+  "captain": { ... },
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+```
+
+**Error Responses:**
+
+* `400 Bad Request`
+* `500 Internal Server Error`
+* `401 Unauthorized`
+
+## Map API Documentation
+
+### Get Location Coordinates
 
 **Endpoint:** `GET /maps/get-location`
 
-### Query Parameters
-```
-address: string (minimum 3 characters)
-```
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-### Response
+**Query Parameters:** `address`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
   "lat": "string",
@@ -518,95 +557,55 @@ address: string (minimum 3 characters)
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
-```json
-{
-  "errors": [
-    {
-      "msg": "Invalid value",
-      "param": "address",
-      "location": "query"
-    }
-  ]
-}
-```
+* `400 Bad Request`
+* `404 Not Found`
 
-**Code:** 404 Not Found
-```json
-{
-  "message": "Coordinates Not Found"
-}
-```
+**Validation Rules:**
 
-### Validation Rules
-- Address must be a string with at least 3 characters
-- Address is required
+* Address must be a valid string with minimum 3 characters
 
-## Get Distance and Time
-Calculate distance and time between two locations.
+---
+
+### Get Distance and Time
 
 **Endpoint:** `GET /maps/get-distance-time`
 
-### Query Parameters
-```
-origin: string (minimum 3 characters)
-destination: string (minimum 3 characters)
-```
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-### Response
+**Query Parameters:** `origin`, `destination`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 {
-  "distance": "string (e.g., '10.5 Km')",
-  "duration": "string (e.g., '15.5 Minutes')"
+  "distance": "string",
+  "duration": "string"
 }
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
-```json
-{
-  "errors": [
-    {
-      "msg": "Invalid value",
-      "param": "origin",
-      "location": "query"
-    }
-  ]
-}
-```
+* `400 Bad Request`
+* `404 Not Found`
 
-**Code:** 404 Not Found
-```json
-{
-  "message": "Route Not Found Between the 2 Areas"
-}
-```
+**Validation Rules:**
 
-### Validation Rules
-- Origin must be a string with at least 3 characters
-- Destination must be a string with at least 3 characters
-- Both fields are required
+* Origin and Destination must be valid strings with minimum 3 characters
 
-## Get AutoComplete Suggestions
-Get location suggestions based on input.
+---
+
+### Get AutoComplete Suggestions
 
 **Endpoint:** `GET /maps/get-suggestions`
 
-### Query Parameters
-```
-input: string (minimum 3 characters)
-```
+**Headers:** `Authorization: Bearer JWT_TOKEN_STRING`
 
-### Response
+**Query Parameters:** `input`
 
-#### Success Response
-**Code:** 200 OK
+**Success Response:** `200 OK`
+
 ```json
 [
   {
@@ -617,43 +616,109 @@ input: string (minimum 3 characters)
 ]
 ```
 
-#### Error Responses
+**Error Responses:**
 
-**Code:** 400 Bad Request
+* `400 Bad Request`
+* `404 Not Found`
+
+**Validation Rules:**
+
+* Input must be a valid string with minimum 3 characters
+
+## WebSocket Events Documentation
+
+### Connection Events
+
+#### Join Room
+
+**Event:** `join`
+
+**Payload:**
+
 ```json
 {
-  "errors": [
-    {
-      "msg": "Invalid value",
-      "param": "input",
-      "location": "query"
-    }
-  ]
+  "userId": "string",
+  "type": "string" // "user" or "captain"
 }
 ```
 
-**Code:** 404 Not Found
+---
+
+#### Update Captain Location
+
+**Event:** `update-location-captain`
+
+**Payload:**
+
 ```json
 {
-  "message": "No suggestions found for the given input"
+  "userId": "string",
+  "location": {
+    "lat": "number",
+    "long": "number"
+  }
 }
 ```
 
-### Validation Rules
-- Input must be a string with at least 3 characters
-- Input is required
+---
 
-# Root Endpoint
+### Server-to-Client Events
 
-## Welcome Message
-Get a welcome message from the server.
+* **`new-ride-request`** — Sent to nearby captains when a new ride is created.
+* **`ride-confirmed`** — Sent to user when a captain confirms the ride.
+* **`ride-started`** — Sent to user when ride begins.
+* **`ride-ended`** — Sent to user when ride ends.
+
+---
+
+## Root Endpoint
+
+### Welcome Message
 
 **Endpoint:** `GET /`
 
-### Response
+**Success Response:** `200 OK`
 
-#### Success Response
-**Code:** 200 OK
-```
-hello Worlds
-```
+{
+  "message": "Hello World"
+}
+
+## 🚗 Live Tracking (Real-Time Location Updates)
+
+ The live tracking feature allows users to see the captain’s current location during a ride, using **React + Leaflet** on the frontend and **Socket.IO** for real-time communication.
+
+## 🔁 Flow Overview
+### Captain Joins WebSocket Room
+
+#### Upon login, the captain emits a join event:
+
+json
+Copy
+Edit
+{
+  "userId": "string",
+  "type": "captain"
+}
+#### Captain Sends Location Updates
+
+At regular intervals (e.g., every 3–5 seconds), the captain emits:
+
+json
+Copy
+Edit
+{
+  "userId": "string",
+  "location": {
+    "lat": "number",
+    "long": "number"
+  }
+}
+### Event Name: update-location-captain
+
+#### Server Emits Location to User
+
+The backend emits the captain’s updated location to the assigned user via a custom event, e.g., captain-location-update.
+
+#### User Receives and Displays Location
+
+The frontend listens for captain-location-update and repositions the marker on the map.
