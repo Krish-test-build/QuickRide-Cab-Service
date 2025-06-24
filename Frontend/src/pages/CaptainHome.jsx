@@ -128,7 +128,9 @@ useGSAP(()=>{
       <LiveTracking/>
       </div>
       <div className='flex flex-col justify-end absolute bottom-0 w-full'>
-        <CaptainDetails/>
+        <CaptainDetails
+        captain={captain}
+        />
       </div>
       <div ref={RidePopupPanelRef}  className='fixed w-full bottom-0  translate-y-full bg-white p-3 rounded-t-xl z-[60]'>
          <RidePopup 

@@ -9,7 +9,7 @@ const CaptainDetails = (props) => {
               <div className='flex items-start  justify-between gap-20'>
                 <div className='inline-flex gap-4 mt-4 items-center'>
                   <img className='w-13 h-13 rounded-full object cover' src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cG9ydHJhaXR8ZW58MHwyfDB8fHww" alt="" />
-                <h4 className='text-xl font-medium'> Lorem ipsum</h4>
+                <h4 className='text-xl font-medium'> {props.captain?.fullName?.firstName} {props.captain?.fullName?.lastName}</h4>
                 </div>
               <div className='mb-4 flex flex-col mt-5'>
                 <h4 className='text-xl text-black font-semibold'>₹300.2</h4>
